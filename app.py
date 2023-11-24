@@ -20,8 +20,9 @@ st.title("Finibot")
 
 st.header("Hello! Welcome to the Financial Advisor Chatbot! To get started, please upload your CSV file (use [this template](https://drive.google.com/file/d/1-OjQbxRZqlTmTeU-KD6pW_9JQWrpCsTO/view?usp=sharing)).")
 
-csv = st.file_uploader("upload file", type={"csv"})
-text_df = pd.read_csv(csv)
+csv_file = st.file_uploader("upload file", type={"csv"})
+if csv_file is not None:
+    text_df = pd.read_csv(csv_file)
 st.write(text_df)
 
 level = st.radio(
@@ -61,8 +62,8 @@ st.markdown(output_markdown)
 
 from langchain.document_loaders.csv_loader import CSVLoader
 
-def loadCSVFile(csv):
-	loader = CSVLoader(file_path=csv)
+def loadCSVFile(csv_file):
+	loader = CSVLoader(file_path=csv_file)
 	data = loader.load()
 
 	# Convert each document's content into a text string
