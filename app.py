@@ -23,7 +23,7 @@ st.header("Hello! Welcome to the Financial Advisor Chatbot! To get started, plea
 csv_file = st.file_uploader("upload file", type={"csv"})
 if csv_file is not None:
     text_df = pd.read_csv(csv_file)
-st.write(text_df)
+    st.write(text_df)
 
 level = st.radio(
     "What's your level of expertise?",
