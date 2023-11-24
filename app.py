@@ -21,9 +21,16 @@ st.title("Finibot")
 st.header("Hello! Welcome to the Financial Advisor Chatbot! To get started, please upload your CSV file (use [this template](https://drive.google.com/file/d/1-OjQbxRZqlTmTeU-KD6pW_9JQWrpCsTO/view?usp=sharing)).")
 
 csv_file = st.file_uploader("upload file", type={"csv"})
+
 if csv_file is not None:
     text_df = pd.read_csv(csv_file)
     st.write(text_df)
+    
+    # Convert the DataFrame to CSV and then to a string
+    text_io = StringIO()
+    text_df.to_csv(text_io, index=False)
+    text = text_io.getvalue()
+    text_io.close()
 
 level = st.radio(
     "What's your level of expertise?",
@@ -143,7 +150,7 @@ chain = MultiPromptChain(
 	verbose=False,
 )
 
-input = text_df
+input = text
 
 # Execute the chain with the input text
 output = chain.run(input)
