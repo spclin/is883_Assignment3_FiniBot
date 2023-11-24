@@ -22,18 +22,6 @@ st.header("Hello! Welcome to the Financial Advisor Chatbot! To get started, plea
 
 csv_file = st.file_uploader("upload file", type={"csv"})
 
-if csv_file is not None:
-    text_df = pd.read_csv(csv_file)
-    st.write(text_df)
-    
-    # Convert the DataFrame to CSV and then to a string
-    text_io = StringIO()
-    text_df.to_csv(text_io, index=False)
-    text = text_io.getvalue()
-    text_io.close()
-
-    return text
-
 level = st.radio(
     "What's your level of expertise?",
     ["Novice", "Expert"],
@@ -152,31 +140,41 @@ chain = MultiPromptChain(
 	verbose=False,
 )
 
-input = text
-
-# Execute the chain with the input text
-output = chain.run(input)
-
 ##########################################################################
 
+if csv_file is not None:
+    text_df = pd.read_csv(csv_file)
+    st.write(text_df)
+    
+    # Convert the DataFrame to CSV and then to a string
+    text_io = StringIO()
+    text_df.to_csv(text_io, index=False)
+    text = text_io.getvalue()
+    text_io.close()
 
-output_markdown = f"""
-## Analysis
+    # The variable 'input' should be defined here as 'text' is now created within this block.
+    input = text
 
-**Total Savings:** {output['savings']}
-**Monthly Debt:** {output['credit_card_debt']}
-**Monthly Income:** {output['income']}
+    # Execute the chain with the input text
+    output = chain.run(input)
 
----
+    output_markdown = f"""
+    ## Analysis
 
-## Financial Situation:
-{output['financial_situation']}
+    **Total Savings:** {output['savings']}
+    **Monthly Debt:** {output['credit_card_debt']}
+    **Monthly Income:** {output['income']}
 
----
+    ---
 
-## Recommendation:
-{output['recommendation']}
-"""
+    ## Financial Situation:
+    {output['financial_situation']}
 
-# Use st.markdown() to display the formatted string
-st.markdown(output_markdown)
+    ---
+
+    ## Recommendation:
+    {output['recommendation']}
+    """
+
+    # Use st.markdown() to display the formatted string
+    st.markdown(output_markdown)
