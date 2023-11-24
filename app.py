@@ -32,6 +32,8 @@ if csv_file is not None:
     text = text_io.getvalue()
     text_io.close()
 
+    return text
+
 level = st.radio(
     "What's your level of expertise?",
     ["Novice", "Expert"],
