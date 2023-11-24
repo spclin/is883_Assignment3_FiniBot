@@ -11,6 +11,51 @@ import pandas as pd
 open_AI_key = os.environ.get('OPENAI_API_KEY')
 openai.api_key = open_AI_key
 
+
+
+# UX goes here. You will have to incorporate some variables from the code above and make some tweaks.
+
+st.set_page_config(page_title="Finibot", page_icon="🤖")
+st.title("Finibot")
+
+st.header("Hello! Welcome to the Financial Advisor Chatbot! To get started, please upload your CSV file (use [this template](https://drive.google.com/file/d/1-OjQbxRZqlTmTeU-KD6pW_9JQWrpCsTO/view?usp=sharing)).")
+
+csv = st.file_uploader("upload file", type={"csv"})
+text_df = pd.read_csv(csv)
+st.write(text_df)
+
+level = st.radio(
+    "What's your level of expertise?",
+    ["Novice", "Expert"],
+    index=None,
+)
+
+st.write("You selected:", level)
+
+output_markdown = f"""
+## Analysis
+
+**Total Savings:** {output['savings']}
+**Monthly Debt:** {output['credit_card_debt']}
+**Monthly Income:** {output['income']}
+
+---
+
+## Financial Situation:
+{output['financial_situation']}
+
+---
+
+## Recommendation:
+{output['recommendation']}
+"""
+
+# Use st.markdown() to display the formatted string
+st.markdown(output_markdown)
+
+
+
+
 ### Here, with some adjustments, copy-paste the code you developed for Question 1 in Assignment 3 
 ##########################################################################
 
@@ -138,44 +183,3 @@ input = text
 output = chain.run(input)
 
 ##########################################################################
-
-
-# UX goes here. You will have to incorporate some variables from the code above and make some tweaks.
-
-st.set_page_config(page_title="Finibot", page_icon="🤖")
-st.title("Finibot")
-
-st.header("Hello! Welcome to the Financial Advisor Chatbot! To get started, please upload your CSV file (use [this template](https://drive.google.com/file/d/1-OjQbxRZqlTmTeU-KD6pW_9JQWrpCsTO/view?usp=sharing)).")
-
-csv = st.file_uploader("upload file", type={"csv"})
-text_df = pd.read_csv(csv)
-st.write(text_df)
-
-level = st.radio(
-    "What's your level of expertise?",
-    ["Novice", "Expert"],
-    index=None,
-)
-
-st.write("You selected:", level)
-
-output_markdown = f"""
-## Analysis
-
-**Total Savings:** {output['savings']}
-**Monthly Debt:** {output['credit_card_debt']}
-**Monthly Income:** {output['income']}
-
----
-
-## Financial Situation:
-{output['financial_situation']}
-
----
-
-## Recommendation:
-{output['recommendation']}
-"""
-
-# Use st.markdown() to display the formatted string
-st.markdown(output_markdown)
