@@ -33,28 +33,6 @@ level = st.radio(
 
 st.write("You selected:", level)
 
-output_markdown = f"""
-## Analysis
-
-**Total Savings:** {output['savings']}
-**Monthly Debt:** {output['credit_card_debt']}
-**Monthly Income:** {output['income']}
-
----
-
-## Financial Situation:
-{output['financial_situation']}
-
----
-
-## Recommendation:
-{output['recommendation']}
-"""
-
-# Use st.markdown() to display the formatted string
-st.markdown(output_markdown)
-
-
 
 
 ### Here, with some adjustments, copy-paste the code you developed for Question 1 in Assignment 3 
@@ -184,3 +162,25 @@ input = text
 output = chain.run(input)
 
 ##########################################################################
+
+
+output_markdown = f"""
+## Analysis
+
+**Total Savings:** {output['savings']}
+**Monthly Debt:** {output['credit_card_debt']}
+**Monthly Income:** {output['income']}
+
+---
+
+## Financial Situation:
+{output['financial_situation']}
+
+---
+
+## Recommendation:
+{output['recommendation']}
+"""
+
+# Use st.markdown() to display the formatted string
+st.markdown(output_markdown)
