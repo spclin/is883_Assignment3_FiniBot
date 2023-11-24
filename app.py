@@ -38,19 +38,6 @@ st.write("You selected:", level)
 ### Here, with some adjustments, copy-paste the code you developed for Question 1 in Assignment 3 
 ##########################################################################
 
-from langchain.document_loaders.csv_loader import CSVLoader
-
-def loadCSVFile(csv_file):
-	loader = CSVLoader(file_path=csv_file)
-	data = loader.load()
-
-	# Convert each document's content into a text string
-	text = ""
-	for document in data:
-	  text += document.page_content
-
-	return text
-
 Output_template="""
 Using the input, you will provide three separate sections of information.
 First, show the "Total savings" (savings), "Monthly debt" (credit card debt), and "Monthly income" (income) in separate lines.
@@ -156,7 +143,7 @@ chain = MultiPromptChain(
 	verbose=False,
 )
 
-input = text
+input = text_df
 
 # Execute the chain with the input text
 output = chain.run(input)
