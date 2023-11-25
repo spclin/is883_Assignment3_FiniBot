@@ -158,23 +158,5 @@ if csv_file is not None:
     # Execute the chain with the input text
     output = chain.run(input)
 
-    output_markdown = f"""
-    ## Analysis
-
-    **Total Savings:** {output}
-    **Monthly Debt:** {output}
-    **Monthly Income:** {output}
-
-    ---
-
-    ## Financial Situation:
-    {output}
-
-    ---
-
-    ## Recommendation:
-    {output}
-    """
-
     # Use st.markdown() to display the formatted string
-    st.markdown(output_markdown)
+    st.markdown(output)
