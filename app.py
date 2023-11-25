@@ -161,19 +161,19 @@ if csv_file is not None:
     output_markdown = f"""
     ## Analysis
 
-    **Total Savings:** {output['savings']}
-    **Monthly Debt:** {output['credit_card_debt']}
-    **Monthly Income:** {output['income']}
+    **Total Savings:** {output}
+    **Monthly Debt:** {output}
+    **Monthly Income:** {output}
 
     ---
 
     ## Financial Situation:
-    {output['financial_situation']}
+    {output}
 
     ---
 
     ## Recommendation:
-    {output['recommendation']}
+    {output}
     """
 
     # Use st.markdown() to display the formatted string
