@@ -158,7 +158,7 @@ if csv_file is not None:
     # Execute the chain with the input text
     output = chain.run(input)
 
-    output_markdown = """
+    output_markdown = f"""
     ## Analysis
 
     **Total Savings:** {output}
