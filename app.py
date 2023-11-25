@@ -20,7 +20,7 @@ st.title("Finibot")
 
 st.header("Hello! Welcome to the Financial Advisor Chatbot! To get started, please upload your CSV file (use [this template](https://drive.google.com/file/d/1-OjQbxRZqlTmTeU-KD6pW_9JQWrpCsTO/view?usp=sharing)).")
 
-csv_file = st.file_uploader("upload file", type={"csv"})
+csv_file = st.file_uploader("Upload your data:", type={"csv"})
 
 level = st.radio(
     "What's your level of expertise?",
